@@ -3,6 +3,7 @@ import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 import { getStore } from './store'
 import { escapeInject, dangerouslySkipEscape } from 'vike/server'
+import { PageShell } from './PageShell'
 
 export { render }
 export { onBeforeRender }
@@ -14,6 +15,9 @@ async function render(pageContext) {
   const { pageHtml } = pageContext
   return escapeInject`<!DOCTYPE html>
     <html>
+      <head>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
+      </head>
       <body>
         <div id="react-root">${dangerouslySkipEscape(pageHtml)}</div>
       </body>
@@ -26,7 +30,9 @@ async function onBeforeRender(pageContext) {
   const { Page } = pageContext
   const pageHtml = renderToString(
     <Provider store={store}>
-      <Page />
+      <PageShell pageContext={pageContext}>
+        <Page />
+      </PageShell>
     </Provider>
   )
 

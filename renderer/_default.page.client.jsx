@@ -3,6 +3,7 @@ export { render }
 import React from 'react'
 import { hydrateRoot } from 'react-dom/client'
 import { Provider } from 'react-redux'
+import { PageShell } from './PageShell'
 import { getStore } from './store'
 
 async function render(pageContext) {
@@ -13,7 +14,9 @@ async function render(pageContext) {
   hydrateRoot(
     document.getElementById('react-root'),
     <Provider store={store}>
-      <Page />
+      <PageShell pageContext={pageContext}>
+        <Page />
+      </PageShell>
     </Provider>
   )
 }
