@@ -1,8 +1,13 @@
-Example of using Vike with React and Redux.
+# MindsDB Coding Exercise
 
-```bash
-git clone git@github.com:vikejs/vike
-cd vike/examples/redux/
-npm install
-npm run dev
-```
+Technologies:
+* https://vike.dev/ (A Vite+SSR solution)
+
+## Development
+
+### Setup
+# Install the version of Node shown in `.node-version`
+# Run `npm install`
+# Run `npm run dev` and browse to http://localhost:3000/
+
+
