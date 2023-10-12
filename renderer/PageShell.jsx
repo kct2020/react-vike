@@ -1,5 +1,7 @@
 import React from 'react'
 import arrowLeft from './arrow-left.svg'
+import bear from './Bear.svg'
+import code from './code.svg'
 import './PageShell.css'
 import { PageContextProvider } from './usePageContext'
 import { Link } from '../components/Link/Link'
@@ -13,7 +15,9 @@ function PageShell({ pageContext, children }) {
       <PageContextProvider pageContext={pageContext}>
         <Layout>
           <Sidebar>
-            MD
+            <SidebarIcon icon={bear} alt="Bear" />
+            <SidebarIcon icon={code} alt="Code" background="#00a587" />
+
           </Sidebar>
           <Rightpanel>
             <Navigation>
@@ -137,4 +141,18 @@ function ArrowLeft() {
       </a>
     </div>
   )
+}
+
+function SidebarIcon(props) {
+  const { icon, alt, background } = props;
+  console.log('@background', background);
+  return (
+    <img src={icon} alt={alt} style={{
+              display: 'flex',
+              width: '32px',
+              height: '32px',
+              marginBottom: '8px',
+              background: background,
+            }}/>
+  );
 }
