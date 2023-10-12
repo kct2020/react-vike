@@ -1,16 +1,17 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useAppSelector, useAppDispatch } from '../renderer/hooks'
 import { Tip } from '../components/tip/Tip'
 import { SearchDatasource } from '../features/datasource/SearchDatasource'
+import { increment, decrement, selectCount } from './counterSlice'
 
 export { Page }
 
 function Page() {
-  const count = useSelector((state) => state.value)
-  const dispatch = useDispatch()
+  const count = useAppSelector(selectCount)
+  const dispatch = useAppDispatch()
 
-  const increment = () => dispatch({ type: 'counter/incremented' })
-  const decrement = () => dispatch({ type: 'counter/decremented' })
+  const handleIncrement = () => dispatch(increment())
+  const handleDecrement = () => dispatch(decrement())
 
   return (
     <>
@@ -18,7 +19,7 @@ function Page() {
       <Tip />
       <SearchDatasource />
       <h1>Redux-Controlled Counter</h1>
-      Count: {count}. <button onClick={increment}>++</button> <button onClick={decrement}>--</button>
+      Count: {count}. <button onClick={handleIncrement}>++</button> <button onClick={handleDecrement}>--</button>
     </>
   )
 }

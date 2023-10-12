@@ -10,7 +10,12 @@ export default ({command})  => {
     // Build
     return {
       plugins: [react(), vike({prerender: true})],
-      base: '/~antun/mindsdb/client'
+      base: '/~antun/mindsdb/client',
+      ssr: {
+        noExternal: [
+          '@reduxjs/toolkit'
+        ]
+      }
     }
   }
 }

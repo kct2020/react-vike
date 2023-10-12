@@ -5,9 +5,10 @@ import { Actions } from './Actions'
 export { Datasource }
 
 
-function Datasource() {
+function Datasource(props) {
+  const { title } = props;
   return (
-    <div className="Datasource"
+    <button className="Datasource"
       style={{width: 188.80,
       height: 176,
       paddingTop: 36,
@@ -27,7 +28,7 @@ function Datasource() {
         style={{width: 30.40, height: 64, left: 17.60, top: 0, position: 'absolute', background: '#00684A'}}></div>
       </div>
       <div className="Mongodb"
-      style={{color: '#27272A', fontSize: 14, fontFamily: 'Inter', fontWeight: '500', lineHeight: '14px', wordWrap: 'break-word'}}>MongoDB</div>
-    </div>
+      style={{color: '#27272A', fontSize: 14, fontFamily: 'Inter', fontWeight: '500', lineHeight: '14px', wordWrap: 'break-word'}}>{title}</div>
+    </button>
   );
 }
