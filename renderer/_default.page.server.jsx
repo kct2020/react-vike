@@ -15,6 +15,7 @@ async function render(pageContext) {
   const { pageHtml } = pageContext
   return escapeInject`<!DOCTYPE html>
     <html>
+      <title>MindsDB Web</title>
       <head>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Inter">
       </head>
