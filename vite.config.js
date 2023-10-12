@@ -10,8 +10,9 @@ export default ({command})  => {
     // Build
     return {
       plugins: [react(), vike({prerender: true})],
-      base: '/~antun/mindsdb/client',
+      base: '/software/sites/mindsdb',
       /*
+      base: '/~antun/mindsdb',
       build: {
         outDir: 'dist',
         sourcemap: true,
