@@ -5,7 +5,13 @@ const initialState = {
   dataSourceData: [],
   filteredData: [],
   status: 'idle',
-  searchTerm: ''
+  searchTerm: '',
+  filterOptions: [
+    { value: 'all', label: 'All' },
+    { value: 'ml', label: 'Machine Learning' },
+    { value: 'data', label: 'Data' }
+  ],
+  selectedFilter: '',
 };
 
 export const loadData = createAsyncThunk(
@@ -24,11 +30,11 @@ export const loadData = createAsyncThunk(
   }
 );
 
-const filterBySearchTerm = (data, searchTerm) => {
-  if (searchTerm === '') {
-    return data;
-  }
+const filterDatasources = (data, searchTerm, typeFilter) => {
   return data.filter((item) => {
+    if ((typeFilter !== '' && typeFilter !== 'all') && item.type !== typeFilter) {
+      return false;
+    }
     const words = item.title.toLowerCase().split(' ');
     let lowerSearchTerm = searchTerm.toLowerCase();
     let match = false;
@@ -46,9 +52,7 @@ const filterBySearchTerm = (data, searchTerm) => {
 const cleanData = (data) => {
   return data.filter((item) => {
     if (typeof item.title === 'undefined'
-        || item.title === ''
-        || !item.connection_args
-        || !item.icon ) {
+        || item.title === '') {
       return false;
     } 
     return true;
@@ -61,7 +65,12 @@ export const datasourceSlice = createSlice({
   reducers: {
     updateSearchTerm: (state, action) => {
       state.searchTerm = action.payload;
-      state.filteredData = filterBySearchTerm(state.dataSourceData, action.payload);
+      state.filteredData = filterDatasources(state.dataSourceData, action.payload, state.selectedFilter);
+    },
+    updateFilter: (state, action) => {
+      state.selectedFilter = action.payload;
+      console.log('action.payload', action.payload);
+      state.filteredData = filterDatasources(state.dataSourceData, state.searchTerm, action.payload);
     }
   },
   extraReducers: (builder) => {
@@ -84,5 +93,5 @@ export const datasourceSlice = createSlice({
   });
 
 export const getFilteredData = (state) => state.datasource.filteredData;
-export const { updateSearchTerm } = datasourceSlice.actions;
+export const { updateSearchTerm, updateFilter } = datasourceSlice.actions;
 export default datasourceSlice.reducer;
