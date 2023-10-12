@@ -145,7 +145,6 @@ function ArrowLeft() {
 
 function SidebarIcon(props) {
   const { icon, alt, background } = props;
-  console.log('@background', background);
   return (
     <img src={icon} alt={alt} style={{
               display: 'flex',
