@@ -1,7 +1,7 @@
 import React from 'react'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
-import { getStore } from './store'
+import { store } from './store'
 import { escapeInject, dangerouslySkipEscape } from 'vike/server'
 import { PageShell } from './PageShell'
 
@@ -25,7 +25,6 @@ async function render(pageContext) {
 }
 
 async function onBeforeRender(pageContext) {
-  const store = getStore()
 
   const { Page } = pageContext
   const pageHtml = renderToString(

@@ -1,12 +1,9 @@
 import react, { useEffect, useState } from 'react'
-// import { useSelector, useDispatch } from 'react-redux'
+import { useAppSelector, useAppDispatch } from '../../renderer/hooks'
 
 import { Actions } from './Actions'
 import { Datasource } from './Datasource'
-
-import { useAppSelector, useAppDispatch } from '../../renderer/hooks'
-
-import { increment, decrement } from '../../pages/counterSlice'
+import { loadData } from './datasourceSlice'
 
 export { SearchDatasource }
 
@@ -14,16 +11,28 @@ export { SearchDatasource }
 function SearchDatasource() {
   
   const [isFirstRender, setIsFirstRender] = useState(true);
+  const filteredData = useAppSelector(state => state.datasource.filteredData)
+  console.log('@filteredData', filteredData);
+
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (isFirstRender) {
       console.log('SearchDatasource mounted');
       setIsFirstRender(false);
-      dispatch({type: 'searchDatasource/mounted'})
+      console.log('@@@@ loadData', loadData());
+      dispatch(loadData())
       return;
     }
   }, []);
+
+  const datasources = filteredData.map((datasource, index) => {
+    if (!datasource.title || !datasource.icon || !datasource.icon.data || !datasource.icon.type) {
+      console.log('omitting', datasource);
+      return null;
+    }
+    return <Datasource key={index} title={datasource.title} icon={datasource.icon}/>
+  });
 
   return (
     <>
@@ -31,14 +40,7 @@ function SearchDatasource() {
       <Actions />
       <div className="Frame427318935"
         style={{width: '100%', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 20, display: 'inline-flex'}}>
-        <Datasource title="MongoDB"/>
-        <Datasource title="Solr" />
-        <Datasource />
-        <Datasource />
-        <Datasource />
-        <Datasource />
-        <Datasource />
-        <Datasource />
+        {datasources}
       </div>
     </>
   );

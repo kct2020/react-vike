@@ -11,6 +11,12 @@ export default ({command})  => {
     return {
       plugins: [react(), vike({prerender: true})],
       base: '/~antun/mindsdb/client',
+      /*
+      build: {
+        outDir: 'dist',
+        sourcemap: true,
+      },
+      */
       ssr: {
         noExternal: [
           '@reduxjs/toolkit'

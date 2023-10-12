@@ -6,7 +6,13 @@ export { Datasource }
 
 
 function Datasource(props) {
-  const { title } = props;
+  const { title, icon } = props;
+
+  let iconUrl = '';
+  if (icon && icon.data && icon.type) {
+    iconUrl = `data:${icon.type};base64,${icon.data}`;
+  }
+
   return (
     <button className="Datasource"
       style={{width: 188.80,
@@ -24,8 +30,16 @@ function Datasource(props) {
       display: 'inline-flex'}}>
       <div className="Component1"
         style={{width: 64, height: 64, position: 'relative'}}>
-        <div className="Vector"
-        style={{width: 30.40, height: 64, left: 17.60, top: 0, position: 'absolute', background: '#00684A'}}></div>
+        <div 
+          style={{
+            backgroundImage: `url(${iconUrl})`,
+            backgroundSize: 'contain',
+            width: '100%',
+            height: '100%',
+            position: 'absolute',
+            backgroundPosition: 'center',
+            backgroundRepeat: 'no-repeat'
+        }}/>
       </div>
       <div className="Mongodb"
       style={{color: '#27272A', fontSize: 14, fontFamily: 'Inter', fontWeight: '500', lineHeight: '14px', wordWrap: 'break-word'}}>{title}</div>
