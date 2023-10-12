@@ -4,7 +4,7 @@ const initialState = {
   rawData: [],
   dataSourceData: [],
   filteredData: [],
-  status: 'idle',
+  status: 'loading',
   searchTerm: '',
   filterOptions: [
     { value: 'all', label: 'All' },
