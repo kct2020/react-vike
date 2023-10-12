@@ -2,24 +2,17 @@ import React from 'react'
 import { useAppSelector, useAppDispatch } from '../renderer/hooks'
 import { Tip } from '../components/tip/Tip'
 import { SearchDatasource } from '../features/datasource/SearchDatasource'
-import { increment, decrement, selectCount } from './counterSlice'
 
 export { Page }
 
 function Page() {
-  const count = useAppSelector(selectCount)
   const dispatch = useAppDispatch()
-
-  const handleIncrement = () => dispatch(increment())
-  const handleDecrement = () => dispatch(decrement())
 
   return (
     <>
       <Title />
       <Tip />
       <SearchDatasource />
-      <h1>Redux-Controlled Counter</h1>
-      Count: {count}. <button onClick={handleIncrement}>++</button> <button onClick={handleDecrement}>--</button>
     </>
   )
 }
