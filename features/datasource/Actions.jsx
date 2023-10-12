@@ -37,7 +37,7 @@ function Actions() {
               </InputAdornment>
             ),
           }}
-          sx={{ width: 183, height: '40px', borderRadius: '6px', fontFamily: 'Inter' }} onChange={handleSearchChange}>
+          sx={{ width: 188.80, height: '40px', borderRadius: '6px', fontFamily: 'Inter' }} onChange={handleSearchChange}>
         </TextField>
         
 
@@ -51,7 +51,7 @@ function Actions() {
             labelId="filter-select-label"
             onChange={handleFilterChange}
             value={selectedFilter}
-            sx={{ width: 183, height: 40, borderRadius: '6px', fontFamily: 'Inter' }}
+            sx={{ width: 188.80, height: 40, borderRadius: '6px', fontFamily: 'Inter' }}
           >
             {filterMenuItems}
           </Select>

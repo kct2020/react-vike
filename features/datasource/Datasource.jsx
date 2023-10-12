@@ -24,11 +24,12 @@ function Datasource(props) {
 
   return (
     <button className="Datasource"
-      style={{width: 188.80,
+      style={{
+      width: 188.80,
+      cursor: 'pointer',
       height: 176,
       paddingTop: 36,
       paddingBottom: 36,
-      background: 'white',
       boxShadow: '0px 0.3512499928474426px 0.7024999856948853px rgba(16, 24, 40, 0.05)',
       borderRadius: 8,
       border: '1px #E4E4E7 solid',
@@ -51,7 +52,7 @@ function Datasource(props) {
         }}/>
       </div>
       <div className="Title"
-      style={{color: '#27272A', fontSize: 14, fontFamily: 'Inter', fontWeight: '500', lineHeight: '14px', wordWrap: 'break-word'}}>{title}</div>
+        style={{color: '#27272A', fontSize: 14, fontFamily: 'Inter', fontWeight: '500', lineHeight: '14px', wordWrap: 'break-word'}}>{title}</div>
     </button>
   );
 }
