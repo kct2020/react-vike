@@ -49,8 +49,8 @@ function Actions() {
           >Filter By</InputLabel>
           <Select
             labelId="filter-select-label"
-            onChange={handleSearchChange}
-            value={searchTerm}
+            onChange={handleFilterChange}
+            value={selectedFilter}
             sx={{ width: 183, height: 40, borderRadius: '6px', fontFamily: 'Inter' }}
           >
             {filterMenuItems}
