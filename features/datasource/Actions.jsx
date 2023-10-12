@@ -1,8 +1,17 @@
 import react from 'react'
+import magnifyingGlass from './magnifying_glass.svg'
+import { useAppSelector, useAppDispatch } from '../../renderer/hooks'
+import { updateSearchTerm } from './datasourceSlice'
 
 export { Actions }
 
 function Actions() {
+  const searchTerm = useAppSelector(state => state.datasource.searchTerm);
+  const dispatch = useAppDispatch();
+  const handleSearchChange = event => {
+    dispatch(updateSearchTerm(event.target.value));
+  };
+
   return (
     <div className="FiltersActions" style={{width: 1024, margin: '16px 0px', height: 40, justifyContent: 'space-between', alignItems: 'flex-start', display: 'inline-flex'}}>
       <div className="InputField" style={{height: 40, flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start', display: 'inline-flex'}}>
@@ -10,9 +19,9 @@ function Actions() {
           <div className="Input" style={{alignSelf: 'stretch', flex: '1 1 0', paddingLeft: 12, paddingRight: 12, paddingTop: 8, paddingBottom: 8, background: 'white', borderRadius: 6, overflow: 'hidden', border: '1px #E4E4E7 solid', justifyContent: 'flex-start', alignItems: 'center', gap: 8, display: 'inline-flex'}}>
             <div className="Text" style={{flex: '1 1 0', height: 24, justifyContent: 'flex-start', alignItems: 'center', gap: 8, display: 'flex'}}>
               <div className="Icons" style={{width: 16, height: 16, position: 'relative'}}>
-                <div className="Vector" style={{width: 12, height: 12, left: 2, top: 2, position: 'absolute', border: '1px #71717A solid'}}></div>
+                <img src={magnifyingGlass} alt="Magnifying Glass" />
               </div>
-              <div className="Email" style={{color: '#71717A', fontSize: 14, fontFamily: 'Inter', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}}>Search</div>
+              <input type="text" style={{width: '100%', height: '100%', background: 'transparent', border: 'none', outline: 'none', color: '#71717A', fontSize: 14, fontFamily: 'Inter', fontWeight: '400', lineHeight: 24, wordWrap: 'break-word'}} placeholder="Search" value={searchTerm} onChange={handleSearchChange} />
             </div>
           </div>
         </div>

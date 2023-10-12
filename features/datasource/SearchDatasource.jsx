@@ -20,23 +20,17 @@ function SearchDatasource() {
     if (isFirstRender) {
       console.log('SearchDatasource mounted');
       setIsFirstRender(false);
-      console.log('@@@@ loadData', loadData());
       dispatch(loadData())
       return;
     }
   }, []);
 
   const datasources = filteredData.map((datasource, index) => {
-    if (!datasource.title || !datasource.icon || !datasource.icon.data || !datasource.icon.type) {
-      console.log('omitting', datasource);
-      return null;
-    }
     return <Datasource key={index} title={datasource.title} icon={datasource.icon}/>
   });
 
   return (
     <>
-      <div />
       <Actions />
       <div className="Frame427318935"
         style={{width: '100%', flexWrap: 'wrap', justifyContent: 'flex-start', alignItems: 'flex-start', gap: 20, display: 'inline-flex'}}>

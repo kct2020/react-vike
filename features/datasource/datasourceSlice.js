@@ -1,9 +1,11 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
+  rawData: [],
   dataSourceData: [],
   filteredData: [],
-  status: 'idle'
+  status: 'idle',
+  searchTerm: ''
 };
 
 export const loadData = createAsyncThunk(
@@ -13,7 +15,6 @@ export const loadData = createAsyncThunk(
       method: 'GET'
     };
     try {
-      console.log('loadData', import.meta.env.BASE_URL );
       const response = await fetch('./mindsdb_connectors.json', options);
       const responseJson = await response.json();
       return responseJson;
@@ -23,11 +24,44 @@ export const loadData = createAsyncThunk(
   }
 );
 
+const filterBySearchTerm = (data, searchTerm) => {
+  if (searchTerm === '') {
+    return data;
+  }
+  return data.filter((item) => {
+    const words = item.title.toLowerCase().split(' ');
+    let lowerSearchTerm = searchTerm.toLowerCase();
+    let match = false;
+    for (let i in words) {
+      if (words[i].startsWith(lowerSearchTerm)) {
+        match = true;
+        break;
+      }
+    }
+    return match;
+  });
+};
+
+// Remove items from data that do not have a title, since they will break filtering
+const cleanData = (data) => {
+  return data.filter((item) => {
+    if (typeof item.title === 'undefined'
+        || item.title === ''
+        || !item.icon ) {
+      return false;
+    } 
+    return true;
+  });
+};
 
 export const datasourceSlice = createSlice({
   name: 'datasource',
   initialState,
   reducers: {
+    updateSearchTerm: (state, action) => {
+      state.searchTerm = action.payload;
+      state.filteredData = filterBySearchTerm(state.dataSourceData, action.payload);
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -36,8 +70,10 @@ export const datasourceSlice = createSlice({
       })
       .addCase(loadData.fulfilled, (state, action) => {
         state.status = 'idle';
-        state.dataSourceData = action.payload;
-        state.filteredData = action.payload;
+        state.rawData = action.payload;
+        const cleanedData = cleanData(action.payload);
+        state.dataSourceData = cleanedData;
+        state.filteredData = cleanedData;
       })
       .addCase(loadData.rejected, (state, action) => {
         state.status = 'failed';
@@ -47,4 +83,5 @@ export const datasourceSlice = createSlice({
   });
 
 export const getFilteredData = (state) => state.datasource.filteredData;
+export const { updateSearchTerm } = datasourceSlice.actions;
 export default datasourceSlice.reducer;
