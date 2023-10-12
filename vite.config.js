@@ -19,7 +19,13 @@ export default ({command})  => {
       */
       ssr: {
         noExternal: [
-          '@reduxjs/toolkit'
+          '@reduxjs/toolkit',
+          '@mui/material',
+          '@mui/system',
+          '@mui/lab',
+          '@mui/base',
+          '@mui/styled-engine',
+          '@mui/material/styles',
         ]
       }
     }
