@@ -1,6 +1,8 @@
 import react from 'react'
 
+
 import { Actions } from './Actions'
+import placeholder from './placeholder.svg'
 
 export { Datasource }
 
@@ -8,10 +10,17 @@ export { Datasource }
 function Datasource(props) {
   const { title, icon } = props;
 
-  let iconUrl = '';
-  if (icon && icon.data && icon.type) {
-    iconUrl = `data:${icon.type};base64,${icon.data}`;
+  let iconUrl = placeholder;
+  if (icon && icon.data && icon.type && icon.data) {
+    let base64Data = icon.data;
+    let iconType = icon.type
+    if (icon.data.indexOf('<svg') === 0 || icon.data.indexOf('<?xml') === 0) {
+      base64Data = btoa(icon.data);
+      iconType = 'image/svg+xml';
+    }
+    iconUrl = `data:${iconType};base64,${base64Data}`;
   }
+
 
   return (
     <button className="Datasource"
@@ -41,7 +50,7 @@ function Datasource(props) {
             backgroundRepeat: 'no-repeat'
         }}/>
       </div>
-      <div className="Mongodb"
+      <div className="Title"
       style={{color: '#27272A', fontSize: 14, fontFamily: 'Inter', fontWeight: '500', lineHeight: '14px', wordWrap: 'break-word'}}>{title}</div>
     </button>
   );
