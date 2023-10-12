@@ -1,7 +1,11 @@
 # MindsDB Coding Exercise
 
 Technologies:
-* https://vike.dev/ (A Vite+SSR solution)
+* React
+* Vike https://vike.dev/ (A Vite+SSR solution)
+* Redux
+* Redux Toolkit https://redux-toolkit.js.org
+* Material UI https://mui.com/material-ui/
 
 ## Development
 
