@@ -1,6 +1,6 @@
 import react from 'react'
 import magnifyingGlass from './magnifying_glass.svg'
-import { useAppSelector, useAppDispatch } from '../../renderer/hooks'
+import { useAppSelector, useAppDispatch } from '../../utils/hooks'
 import { updateSearchTerm } from './datasourceSlice'
 
 export { Actions }

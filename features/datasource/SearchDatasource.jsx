@@ -1,5 +1,5 @@
 import react, { useEffect, useState } from 'react'
-import { useAppSelector, useAppDispatch } from '../../renderer/hooks'
+import { useAppSelector, useAppDispatch, useIsFirstRender } from '../../utils/hooks'
 
 import { Actions } from './Actions'
 import { Datasource } from './Datasource'
@@ -10,16 +10,14 @@ export { SearchDatasource }
 
 function SearchDatasource() {
   
-  const [isFirstRender, setIsFirstRender] = useState(true);
-  const filteredData = useAppSelector(state => state.datasource.filteredData)
-  console.log('@filteredData', filteredData);
+  const isFirstRender = useIsFirstRender();
+  const filteredData = useAppSelector(state => state.datasource.filteredData);
+  //console.log('@filteredData', filteredData);
 
   const dispatch = useAppDispatch()
 
   useEffect(() => {
     if (isFirstRender) {
-      console.log('SearchDatasource mounted');
-      setIsFirstRender(false);
       dispatch(loadData())
       return;
     }

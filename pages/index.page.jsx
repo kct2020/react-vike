@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAppSelector, useAppDispatch } from '../renderer/hooks'
+import { useAppSelector, useAppDispatch } from '../utils/hooks'
 import { Tip } from '../components/tip/Tip'
 import { SearchDatasource } from '../features/datasource/SearchDatasource'
 
