@@ -47,6 +47,7 @@ const cleanData = (data) => {
   return data.filter((item) => {
     if (typeof item.title === 'undefined'
         || item.title === ''
+        || !item.connection_args
         || !item.icon ) {
       return false;
     } 
