@@ -2,7 +2,7 @@ import React from 'react'
 import arrowLeft from './arrow-left.svg'
 import './PageShell.css'
 import { PageContextProvider } from './usePageContext'
-import { Link } from './Link'
+import { Link } from '../components/Link/Link'
 
 export { PageShell }
 
@@ -18,7 +18,7 @@ function PageShell({ pageContext, children }) {
           <Rightpanel>
             <Navigation>
               <ArrowLeft />
-              <Link className="navitem" href="/about">
+              <Link className="navitem" href="/editor">
                 ChatProject
               </Link>
               /

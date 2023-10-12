@@ -16,7 +16,7 @@ a {
   text-decoration: none;
 }
 
-a:visited {
+a, a:visited {
   color: var(--colors-zinc-900, #18181B);
 }
 
